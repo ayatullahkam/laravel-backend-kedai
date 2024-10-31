@@ -5,6 +5,9 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet"
         href="{{ asset('library/bootstrap-social/bootstrap-social.css') }}">
+
+
+
 @endpush
 
 @section('main')
@@ -53,7 +56,7 @@
             </div>
         </div>
         <div class="text-muted mt-5 text-center">
-        Don't have an account? <a href="{{ route('register')}}">Create One</a>
+        Don't have an account? <a href="    ">Create One</a>
         </div>
     @endsection
 
