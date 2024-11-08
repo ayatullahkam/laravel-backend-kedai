@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 // use Illuminate\Http\Request;
 
 use Illuminate\Http\Request;
-use app\Models\User;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
     //get users with pagination
-    $users = DB::table('users')
+    $users = User::with('roles')  // Pastikan relasi roles dimuat
     ->when($request->input('name'), function ($query, $name) {
         return $query->where('name', 'like', '%' . $name . '%');
     })
@@ -36,15 +37,20 @@ public function store(Request $request)
         'email' => 'required',
         'password' => 'required',
         'phone'=> 'required',
-        'roles' => 'required',
+        'role' => 'required|in:admin,user,staf',
     ]);
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
         'phone' => $request->phone,
-        'roles' => $request->roles,
+        'role' => $request->role,
+
+
     ]);
+
+    $user->assignRole($request->role);
+
     return redirect()->route('user.index')->with('success', 'User created successfully.');
 
 }
@@ -76,10 +82,10 @@ public function store(Request $request)
      $data['password'] = $user->password;
  }
  $user->update($data);
+ $user->syncRoles($request->role);
  return redirect()->route('user.index') ->with('success', 'User updated successfully');
-
 }
-   //destroy
+//destroy
  public function destroy($id)
  {
      $user = User::findOrFail($id);

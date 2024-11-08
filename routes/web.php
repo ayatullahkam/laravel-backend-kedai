@@ -23,8 +23,18 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.dashboard', ['type_menu' => 'home']);
     })->name('home');
 
-    Route::resource('user',UserController::class);
+     // Rute untuk admin
+     Route::middleware(['role:admin'])->group(function () {
+        Route::resource('user', UserController::class);
+    });
+
+    //Rute untuk staf dengan prefix 'staff'
+    Route::middleware(['role:staf'])->prefix('staf')->group(function () {
+        Route::get('user', [UserController::class, 'index'])->name('staf.user.index');
+        Route::get('user/create', [UserController::class, 'create'])->name('staf.user.create');
+        Route::post('user', [UserController::class, 'store'])->name('staf.user.store');
+    });
+
     Route::resource('product',ProductController::class);
     Route::resource('profil',ProfilController::class);
-
 });

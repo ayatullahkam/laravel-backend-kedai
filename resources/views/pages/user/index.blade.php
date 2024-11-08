@@ -55,7 +55,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>phone</th>
-                                            <th>roles</th>
+                                            <th>role</th>
                                             <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
@@ -71,12 +71,13 @@
                                                     {{ $user->phone }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->roles }}
+                                                    {{ $user->role }}
                                                 </td>
 
 
                                                 <td>{{ $user->created_at }}</td>
                                                 <td>
+                                                @role('admin|staf')
                                                     <div class="d-flex justify-content-center">
                                                         <a href='{{ route('user.edit', $user->id) }}'
                                                             class="btn btn-sm btn-info btn-icon">
@@ -94,6 +95,7 @@
                                                             </button>
                                                         </form>
                                                     </div>
+                                                    @endrole
                                                 </td>
                                             </tr>
                                         @endforeach

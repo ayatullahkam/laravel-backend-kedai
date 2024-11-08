@@ -13,10 +13,14 @@
                 <li class="{{ Request::is('home*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('home') }}"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
                 </li>
+                @role('admin')
                 <li class="menu-header">Users</li>
                 <li class="{{ Request::is('user*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('user.index')}}"><i class="fas fa-user"></i><span>All Users</span></a>
                 </li>
+                @endrole
+
+
 
                 <li class="menu-header">Product</li>
                 <li class="{{ Request::is('product*') ? 'active' : '' }}">

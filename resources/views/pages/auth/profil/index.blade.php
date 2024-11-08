@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="section-body">
-                <h2 class="section-title">Hi, Ujang!</h2>
+                <h2 class="section-title">Hi, Ayatullah!</h2>
                 <p class="section-lead">
                     Change information about yourself on this page.
                 </p>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="profile-widget-description">
-                                <div class="profile-widget-name">Ujang Maman <div
+                                <div class="profile-widget-name">ayatullah ahkam<div
                                         class="text-muted d-inline font-weight-normal">
                                         <div class="slash"></div> Web Developer
                                     </div>
